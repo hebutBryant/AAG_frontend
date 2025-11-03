@@ -1,0 +1,405 @@
+/* 通用样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #fff; /* 将背景颜色改为纯白 */
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* 左边栏样式 */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 左边栏头部样式 */
+.sidebar-header {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 子元素两端对齐 */
+    align-items: center; /* 垂直方向居中对齐 */
+    margin-bottom: 20px; /* 与下面内容保持间距 */
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    margin: 0; /* 清除默认外边距 */
+    flex-shrink: 0; /* 防止标题被压缩 */
+}
+
+.icon-button {
+    border: none;
+    background: none;
+    font-size: 20px; /* 调整图标大小 */
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
+    flex-shrink: 0; /* 防止按钮被压缩 */
+}
+
+.icon-button:hover {
+    color: #333;
+}
+
+/* 列表样式 */
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+}
+
+.sidebar ul li:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+/* 用户信息样式 */
+.profile {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #888;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile .username {
+    color: #555;
+    font-size: 16px;
+}
+
+.profile .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.dropdownMenu {
+    /* position: absolute;
+    top: -50px;
+    left: 0;
+    transform: translateY(-100%);
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    bottom: 100%; */
+
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    opacity: 0; /* 初始透明度为 0 */
+    transform: translateY(10px); /* 初始位置向下偏移 10px */
+    transition: opacity 0.3s, transform 0.3s; /* 动画效果 */
+}
+
+.dropdownMenu button {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    bottom: 100%;
+}
+
+.dropdownMenu button:hover {
+    color: #4CAF50;
+}
+
+/* 主聊天区域样式 */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+    background-color: #fff; /* 确保主界面背景颜色为白色 */
+    border: none; /* 去掉边框 */
+    box-shadow: none; /* 去掉阴影 */
+}
+
+.main-content.centered {
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content.expanded {
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0;
+    height: 100vh;
+}
+
+/* 初始聊天框样式（有边框） */
+.chat-box {
+    width: 100%;
+    max-width: 600px; /* 保持最大宽度 */
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px; /* 为选择器留出空间 */
+    background: #fff;
+    border: 1px solid #ddd; /* 初始状态下有边框 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加轻微阴影 */
+    border-radius: 10px; /* 圆角边框 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+}
+
+/* 展开状态（去掉边框） */
+.chat-box.expanded {
+    background: none; /* 移除背景 */
+    border: none; /* 移除边框 */
+    box-shadow: none; /* 移除阴影 */
+    border-radius: 0; /* 取消圆角 */
+}
+
+
+.chat-box.centered {
+    max-width: 600px;
+    height: auto;
+    margin-top: 0;
+}
+
+.chat-box.expanded {
+    height: 100vh;
+    border-radius: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-area {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.message-output {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.message-output .text {
+    font-size: 16px;
+    color: #333;
+    max-width: 70%;
+}
+
+.message-output .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.message-input {
+    align-self: flex-end;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #333;
+    max-width: 70%;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+}
+
+.input-area input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.input-area button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.input-area button:hover {
+    background-color: #45a049;
+}
+
+/* 搜索弹窗样式 */
+#searchOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#searchPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+#searchPopup h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#searchPopup input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#searchPopup button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+#searchPopup button:hover {
+    background-color: #45a049;
+}
+
+#searchResults {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* 搜索结果项样式 */
+.search-result-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+/* 选择器样式 */
+.chat-type-selector {
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 距离顶部 10px */
+    left: 280px; /* 距离左侧 10px */
+    z-index: 100; /* 保证在其他元素之上 */
+}
+
+.chat-type-selector select {
+    padding: 5px 10px; /* 内边距 */
+    font-size: 14px; /* 字体大小 */
+    border: none; /* 移除边框 */
+    outline: none; /* 移除聚焦时的外边框 */
+    background: #f5f5f5; /* 背景颜色 */
+    color: #333; /* 字体颜色 */
+    border-radius: 5px; /* 圆角 */
+    appearance: none; /* 移除浏览器默认样式 */
+    text-align: center; /* 水平居中 */
+}
+
+.chat-type-selector select:hover {
+    background: #e0e0e0; /* 鼠标悬停时的背景颜色 */
+    cursor: pointer; /* 鼠标悬停时显示手型 */
+}
+/* 登录按钮样式 */
+.login-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+/* chat.css */
+.chat-type-selector {
+    display: flex;
+    gap: 10px; /* 设置选择器之间的间距 */
+}
+
+#modelSelector {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="/static/css/chat.css">
+</head>
+<body>
+    <!-- 左边栏 -->
+    <div class="sidebar">
+        <!-- 左边栏头部 -->
+        <div class="sidebar-header">
+            <h2>OpenAI</h2>
+            <button id="searchButton" class="icon-button">🔍</button>
+        </div>
+        <!-- 左边栏内容 -->
+        <ul>
+            <li id="createNewChatBtn">创建新对话</li>
+            <div id="todaySection" class="chat-section" style="display: none;">
+                <h3>今天</h3>
+            </div>
+            <div id="yesterdaySection" class="chat-section" style="display: none;">
+                <h3>昨天</h3>
+            </div>
+            <div id="pastWeekSection" class="chat-section" style="display: none;">
+                <h3>过去一周</h3>
+            </div>
+            <div id="pastMonthSection" class="chat-section" style="display: none;">
+                <h3>过去三十天</h3>
+            </div>
+            <div id="pastYearSection" class="chat-section" style="display: none;">
+                <h3>过去一年</h3>
+            </div>
+        </ul>
+        <!-- 用户信息 -->
+        <div class="profile">
+            <!-- 登录按钮，默认显示 -->
+            <button id="loginBtn" class="login-button">登录</button>
+            <!-- 用户信息，默认隐藏 -->
+            <div class="user-info" style="display: none;">
+                <span id="username" class="username">test1</span>
+                <div class="dropdownMenu" id="dropdownMenu" style="display: none;">
+                    <button id="logoutBtn">注销</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <!-- 主内容区域 -->
+    <div class="main-content" id="mainContent">
+        <!-- 对话选择器 -->
+        <div class="chat-type-selector">
+            <select id="chatType">
+                <option value="">请选择</option>
+                <option value="Vector RAG">Vector RAG</option>
+                <option value="Graph RAG">Graph RAG</option>
+                <option value="Hybrid RAG">Hybrid RAG</option>
+                <option value="Without RAG">Without RAG</option>
+            </select>
+            <!-- 新增模型选择按钮 -->
+            <select id="modelSelector">
+                <option value="模型1">模型1</option>
+                <option value="模型2">模型2</option>
+                <option value="模型3">模型3</option>
+                <option value="模型4">模型4</option>
+            </select>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="chat-area" id="chatArea">
+                <!-- 动态加载对话内容 -->
+            </div>
+
+            <div class="input-area" id="inputArea">
+                <input type="text" id="chatInput" name = "user_Input" placeholder="发送消息给 GPT-4">
+                <button onclick="sendMessage()">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜索弹窗 -->
+    <div id="searchOverlay"></div>
+    <div id="searchPopup">
+        <h3>搜索对话</h3>
+        <input type="text" id="searchInput" placeholder="输入搜索内容">
+        <button id="searchSubmitButton">搜索</button>
+        <div id="searchResults" style="margin-top: 15px; font-size: 14px; color: #333;"></div>
+    </div>
+
+    <script src="/static/js/chat.js">
+        var myVariable = "{{ my_variable }}";
+    </script>
+</body>
+</html>

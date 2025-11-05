@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 app = Flask(
     __name__,
     template_folder="app",  
-    static_folder="static"      
+    static_folder="static",
 )
 CORS(app)  # 解决跨域问题
 
@@ -32,12 +32,19 @@ MODEL_MAPPING = {
     "Qwen Plus": "qwen3-max"          
 }
 
-
+########################这一部分集中渲染页面#################################
 @app.route("/")
 def index():
     """根路由：返回聊天页面"""
     return render_template("template-chatbot-s2-convo.html")  
 
+@app.route('/overview')
+def overview():
+    return render_template('overview.html')
+
+
+
+############################################################################
 
 @app.route("/api/chat", methods=["POST"])
 def chat():

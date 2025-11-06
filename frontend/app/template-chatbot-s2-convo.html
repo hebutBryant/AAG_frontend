@@ -386,370 +386,89 @@
             <div class="relative py-5 xl:py-10">
                 <div class="container px-3">
                     <div class="flex flex-wrap gap-x-8 xl:flex-nowrap min-h-[calc(100vh-theme(space.52))] max-h-[calc(100vh-theme(space.52))] max-xl:max-h-[calc(100vh-theme(space.40)-theme(space.2))] max-xl:min-h-[calc(100vh-theme(space.40)-theme(space.2))]">
-                        <div id="chatAside" class="fixed peer start-0 z-[1020] top-[calc(theme(space.16)+theme(space.1))] bottom-0 w-[calc(100%-40px)] max-xl:max-w-80 xl:w-[360px] xl:static flex-shrink-0  xl:!translate-x-0 ltr:-translate-x-full rtl:translate-x-full [&.active]:translate-x-0 max-xl:transition-transform">
-                            <div class="flex flex-col justify-stretch  h-full xl:rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                                <div class="px-7 pt-7">
-                                    <a href="template-chatbot-s2.html" class="flex items-center gap-x-2 text-blue-600 text-sm">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clip-rule="evenodd" />
-                                        </svg><!-- plus-circle - mini - heroicons  -->
-                                        <span>New Conversation</span>
-                                    </a>
-                                </div>
-                                <div class="p-7 h-full overflow-auto flex-grow" data-simplebar>
-                                    <ul class="flex flex-col -mx-4 -my-3">
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950  active">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Random Quote on Your Webpage with JavaScript</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Surprise me with cute awesome photo</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Make an HTTP request in Javascript?</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Team card with tailwind css</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Tutorial React Best practices</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Give me 3 ideas about how to plan good New Years resolutions. Give me some that are personal ,family, and professionally-oriented.</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                        <li class="group flex items-center justify-stretch max-w-full relative">
-                                            <a href="template-chatbot-s2-convo.html" class="flex gap-2 items-center px-4 py-3 w-full rounded-md  [&.active]:bg-blue-100 [&.active]:dark:bg-blue-950 ">
-                                                <div class="flex-shrink-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                                    </svg><!-- chat-bubble-left-right - outline - heroicons  -->
-                                                </div>
-                                                <p class="text-sm text-slate-500 dark:text-slate-300 capitalize truncate">Resignation Letter Assistance</p>
-                                            </a>
-                                            <div class="absolute end-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-10 inline-flex">
-                                                <button data-offset="-12,-8" data-rtl-offset="12,-8" data-placement="bottom-end" data-rtl-placement="bottom-start" class="dropdown-toggle peer h-7 w-7 bg-slate-100 dark:bg-slate-900 rounded-full flex justify-center items-center *:pointer-events-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 text-slate-600 dark:text-slate-200">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                                    </svg><!-- ellipsis-horizontal - outline - heroicons  -->
-                                                </button>
-                                                <div class="dropdown-menu invisible absolute end-0 top-10 w-36 opacity-0 transition-all duration-100 ease-out peer-[.show]:visible peer-[.show_.dropdown-wrap]:scale-100 peer-[.show]:opacity-100">
-                                                    <div class="dropdown-wrap ransition-all origin-top-right scale-90 rounded-lg border border-slate-200 bg-white shadow-sm duration-100 ease-out dark:border-slate-800 dark:bg-slate-950">
-                                                        <ul class="py-2 border-slate-200 dark:border-slate-800">
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                    </svg><!-- pencil-square - outline - heroicons  -->
-                                                                    <span>Rename</span>
-                                                                </a>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                                                    </svg><!-- share - outline - heroicons  -->
-                                                                    <span>Share</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="flex text-xs px-4 py-2 font-medium text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 me-2">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                                    </svg><!-- trash - outline - heroicons  -->
-                                                                    <span>Delete</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- dropdown -->
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="p-4 sm:p-7">
-                                    <a href="packages.html" class="flex justify-between p-4 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-blue-200 hover:dark:border-blue-950 transition-all">
-                                        <div class="">
-                                            <span class="text-[11px] font-medium text-blue-500 bg-gradient-to-r from-blue-100 dark:from-blue-950 to-pink-100 dark:to-pink-950 px-2 py-1 rounded"> Upgrade </span>
-                                            <h3 class="mt-2 font-bold text-sm text-slate-600 dark:text-slate-100">Scribbler Pro</h3>
-                                        </div>
-                                        <div class="text-end">
-                                            <del class="font-medium text-xs text-slate-400 dark:text-slate-300">$24.88</del>
-                                            <div class="font-bold text-lg bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text "> $19.88 </div>
-                                        </div>
-                                    </a>
+                        
+
+
+
+
+                               <div id="chatAside" class="fixed peer start-0 z-[1020] top-[calc(theme(space.16)+theme(space.1))] bottom-0 w-[calc(100%-40px)] max-xl:max-w-80 xl:w-[360px] xl:static flex-shrink-0  xl:!translate-x-0 ltr:-translate-x-full rtl:translate-x-full [&.active]:translate-x-0 max-xl:transition-transform">
+    <div class="flex flex-col justify-stretch h-full xl:rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+        
+        <!-- 选项卡标题 -->
+        <div class="flex h-16 items-center border-b border-slate-200 px-6 py-4 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-700 dark:text-white">工作区</h3>
+        </div>
+
+        <!-- 选项卡导航 -->
+        <div class="flex border-b border-slate-200 dark:border-slate-800">
+            <button class="tab-button active flex-1 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 border-b-2 border-blue-600" data-tab="thinking">
+                分析过程
+            </button>
+            <button class="tab-button flex-1 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200" data-tab="files">
+                存储文件
+            </button>
+        </div>
+
+        <!-- 选项卡内容区域 -->
+        <div class="flex-1 overflow-hidden">
+            <!-- 分析过程面板 -->
+            <div id="thinking-tab" class="tab-content active h-full flex flex-col">
+                <div class="p-6 flex-1 overflow-auto">
+                    <div class="thinking-process">
+                        <h4 class="mb-4 text-sm font-semibold text-slate-600 dark:text-slate-300">AI分析过程</h4>
+                        <div id="thinking-content" class="min-h-[300px] rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
+                            <!-- 思考过程将在这里显示 -->
+                            <div class="flex h-full items-center justify-center text-slate-400 dark:text-slate-500">
+                                <div class="text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                    <p>等待AI开始分析...</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 存储文件面板 -->
+            <div id="files-tab" class="tab-content hidden h-full flex flex-col">
+                <div class="p-6 flex-1 overflow-auto">
+                    <div class="file-management">
+                        <h4 class="mb-4 text-sm font-semibold text-slate-600 dark:text-slate-300">已选择文件</h4>
+                        
+                        <!-- 文件上传区域 -->
+                        <div class="mb-6">
+                            <input type="file" id="file-input" multiple class="hidden">
+                            <button id="upload-btn" class="w-full rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center transition-all hover:border-blue-400 hover:bg-blue-50 dark:border-slate-600 dark:bg-slate-900 hover:dark:border-blue-500 hover:dark:bg-blue-900/20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-3 h-10 w-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-300">添加文件</span>
+                                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">点击上传或拖拽文件到此处</p>
+                            </button>
+                        </div>
+                        
+                        <!-- 已选择文件列表 -->
+                        <div id="file-list" class="space-y-3">
+                            <!-- 文件项将通过JavaScript动态添加 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
                         <div data-target="#chatAside" class="class-toggle fixed inset-0 bg-slate-950 bg-opacity-50 z-[1019] xl:hidden hidden peer-[.active]:block"></div>
                         <div class="w-full xl:w-[calc(100%-theme(space.8)-360px)] max-xl:h-[calc(100vh-theme(space.40)-theme(space.2))] relative">
                             <button data-target="#chatAside" class="class-toggle inline-flex items-center justify-center h-8 w-8 rounded overflow-hidden transition-all text-slate-500 dark:text-slate-300 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 hover:dark:bg-slate-700 hover:text-slate-600 hover:dark:text-slate-200 ui-open:bg-slate-200 ui-open:dark:bg-slate-800 ui-open:text-slate-600 ui-open:dark:text-slate-200 xl:hidden absolute top-4 end-4 z-10">
@@ -1093,35 +812,54 @@ newQuoteButton.addEventListener("click", displayRandomQuote);
                                     </div>
                                 </div>
                                 <div class="pt-3">
-                                    <ul class="flex gap-x-3">
-                                        <li>
-                                            <div class="flex">
-                                                <input class="appearance-none h-0 w-0 opacity-0 peer" type="radio" id="gpt-4" name="language-model" value="GPT 4" checked />
-                                                <label class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md px-3 py-1 cursor-pointer peer-checked:cursor-default peer-checked:text-blue-600 peer-checked:border-blue-300 peer-checked:dark:border-blue-900 transition-all" for="gpt-4">GPT 4</label>
+                                    
+
+    
+                                   
+                                    <ul class="flex gap-x-3 items-center">
+                                         <li>
+                                            <div class="flex items-center gap-x-2">
+                                                 <span class="text-sm font-medium text-slate-600 dark:text-slate-300">模型选择：</span>
+                                                      <div class="relative">
+                                                          <select class="appearance-none bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md pl-3 pr-8 py-1 cursor-pointer focus:outline-none focus:border-blue-300 focus:dark:border-blue-900 transition-all min-w-[120px]">
+                                                             <option value="RAG">RAG</option>
+                                                             <option value="GraphRAG">GraphRAG</option>
+                                                             <option value="AAG">AAG</option>
+                                                          </select>
+                                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-600 dark:text-slate-400">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                            </div>
+                                                     </div>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="flex">
-                                                <input class="appearance-none h-0 w-0 opacity-0 peer" type="radio" id="Gemini" name="language-model" value="Gemini" />
-                                                <label class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md px-3 py-1 cursor-pointer peer-checked:cursor-default peer-checked:text-blue-600 peer-checked:border-blue-300 peer-checked:dark:border-blue-900 transition-all" for="Gemini">Gemini</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="flex">
-                                                <input class="appearance-none h-0 w-0 opacity-0 peer" type="radio" id="Llama-3" name="language-model" value="Llama 3" />
-                                                <label class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md px-3 py-1 cursor-pointer peer-checked:cursor-default peer-checked:text-blue-600 peer-checked:border-blue-300 peer-checked:dark:border-blue-900 transition-all" for="Llama-3">Llama 3</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="flex items-start gap-4 mt-3">
-                                        <div id="chat-input" contentEditable class="py-2.5 px-4 z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-blue-200 focus:shadow-none focus:outline-none"></div>
-                                        <button id="send-btn" class="inline-flex justify-center items-center transition-all p-3 rounded-md bg-blue-600 text-white hover:bg-blue-800">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
-                                            </svg>
-                                            <!-- paper-airplane - outline - heroicons  -->
-                                        </button>
-                                    </div>
+        <li>
+            <div class="flex">
+                <input class="appearance-none h-0 w-0 opacity-0 peer" type="radio" id="dataset" name="language-model" value="Dataset" />
+                <label class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md px-3 py-1 cursor-pointer peer-checked:cursor-default peer-checked:text-blue-600 peer-checked:border-blue-300 peer-checked:dark:border-blue-900 transition-all" for="dataset">Dataset</label>
+            </div>
+        </li>
+        <li>
+            <div class="flex">
+                <input class="appearance-none h-0 w-0 opacity-0 peer" type="radio" id="pending" name="language-model" value="Pending" />
+                <label class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 font-medium text-sm border border-slate-200 dark:border-slate-800 rounded-md px-3 py-1 cursor-pointer peer-checked:cursor-default peer-checked:text-blue-600 peer-checked:border-blue-300 peer-checked:dark:border-blue-900 transition-all" for="pending">待定</label>
+            </div>
+        </li>
+    </ul>
+    <div class="flex items-start gap-4 mt-3">
+        <div id="chat-input" contentEditable class="py-2.5 px-4 z-10 w-full rounded-md text-sm/[1.125rem] bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-200 placeholder:text-slate-400 placeholder:dark:text-slate-500 border border-slate-200 dark:border-slate-800 disabled:bg-slate-100 disabled:text-slate-400 focus:border-blue-200 focus:shadow-none focus:outline-none"></div>
+        <button id="send-btn" class="inline-flex justify-center items-center transition-all p-3 rounded-md bg-blue-600 text-white hover:bg-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            </svg>
+        </button>
+    </div>
+
+
+
+
+                                    
                                 </div>
                             </div>
                         </div>

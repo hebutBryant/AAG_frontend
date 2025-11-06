@@ -42,6 +42,13 @@ def index():
 def overview():
     return render_template('overview.html')
 
+@app.route('/documents')
+def documents():
+    return render_template('documents.html')
+
+@app.route('/manage_dataset')
+def manage_dataset():
+    return render_template('manage_dataset.html')
 
 
 ############################################################################
@@ -129,7 +136,7 @@ def test_qwen_api():
 if __name__ == "__main__":
     test_qwen_api()
     app.run(
-        debug=True,
+        debug=False,
         host="0.0.0.0", 
         port=5000        
     )

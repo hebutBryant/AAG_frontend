@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zxx" id="pageroot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="tongzhewang">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <title>Dataset Editor - Scribbler.AI - AI Content Generator Dashboard and User App HTML Template</title>
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+        .knowledge-base-item {
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+        .knowledge-base-item:hover {
+            border-left-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+        .knowledge-base-item.active {
+            border-left-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .file-item {
+            border-left: 4px solid #3b82f6;
+        }
+        .file-item.processing {
+            border-left-color: #f59e0b;
+        }
+        .file-item.error {
+            border-left-color: #ef4444;
+        }
+        .file-item.completed {
+            border-left-color: #10b981;
+        }
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+        
+        /* Custom layout adjustments */
+        .left-panel {
+            flex: 0 0 300px;
+            max-width: 300px;
+            height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+        .right-panel {
+            flex: 1;
+            min-width: 0;
+            height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+        }
+        .file-list-section {
+            flex: 0 0 50%;
+            overflow-y: auto;
+        }
+        .graph-section {
+            flex: 0 0 50%;
+            border-top: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        @media (max-width: 1024px) {
+            .responsive-container {
+                flex-direction: column;
+            }
+            .left-panel, .right-panel {
+                flex: none;
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        
+        /* Graph visualization styles */
+        #graph-container {
+            width: 100%;
+            height: 100%;
+            background-color: #f8fafc;
+            position: relative;
+        }
+        .graph-node {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .graph-node:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
+        }
+        .graph-edge {
+            position: absolute;
+            height: 2px;
+            background-color: #94a3b8;
+            transform-origin: 0 0;
+        }
+        .graph-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border-radius: 6px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .graph-controls button {
+            margin: 0 4px;
+            padding: 4px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .graph-controls button:hover {
+            background: #f1f5f9;
+        }
+        .graph-legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: white;
+            border-radius: 6px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            font-size: 12px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+
+<body class="min-w-[320px] bg-slate-100 dark:bg-slate-900">
+    <div id="root">
+        <!-- Settings Button (same as original) -->
+        <button data-target="#demoSettings" class="class-toggle fixed end-0 top-1/4 z-[1000] flex h-10 w-10 items-center justify-center rounded-s-lg border border-e-0 border-slate-200 bg-white text-slate-500 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5">
+                <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+        
+        <!-- Settings Panel (same as original) -->
+        <div id="demoSettings" class="fixed z-[5001] hidden h-full w-full [&.active]:block">
+            <!-- ... Settings content same as original ... -->
+        </div>
+        
+        <!-- Header (same as original) -->
+        <div class="flex min-h-screen max-w-full flex-col overflow-x-hidden pt-[calc(theme(space.16)+theme(space.1))]" id="#pagecontent">
+            <div class="fixed start-0 top-0 isolate z-[1020] w-full border-b border-slate-200 bg-white px-3 py-4 dark:border-slate-800 dark:bg-slate-950 xl:py-3">
+                <!-- ... Header content same as original ... -->
+            </div>
+            
+            <!-- Main Content -->
+            <div class="relative px-3 py-10">
+                <div class="container px-3">
+                    <!-- Breadcrumb and Title -->
+                    <div class="-mx-3 mb-7 flex items-center justify-between">
+                        <div class="px-3">
+                            <h2 class="mb-2 text-xl font-bold text-slate-700 dark:text-white">Knowledge Base Editor</h2>
+                            <ul class="inline-flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-300">
+                                <li>
+                                    <a href="overview.html" class="text-blue-500 hover:text-blue-700"> Home </a>
+                                </li>
+                                <li class="mt-0.5 inline-flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-2 w-2">
+                                        <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                                    </svg>
+                                </li>
+                                <li>
+                                    <a href="datasets.html" class="text-blue-500 hover:text-blue-700"> Documents </a>
+                                </li>
+                                <li class="mt-0.5 inline-flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-2 w-2">
+                                        <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                                    </svg>
+                                </li>
+                                <li>Dataset Editor</li>
+                            </ul>
+                        </div>
+                        <div class="px-3 flex gap-2">
+                            <button class="inline-flex items-center justify-center gap-3 rounded-md border border-slate-200 px-5 py-2 text-sm font-medium text-slate-600 transition-all hover:bg-slate-100 dark:border-slate-800 dark:text-slate-200 hover:dark:bg-slate-800">Back</button>
+                            <button class="inline-flex items-center justify-center gap-3 rounded-md bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-blue-800">Save Changes</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Content - Flex Layout -->
+                    <div class="responsive-container flex gap-6">
+                        <!-- Left Column - Knowledge Base List -->
+                        <div class="left-panel">
+                            <div class="rounded-md border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 h-full">
+                                <div class="border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+                                    <h3 class="text-lg font-bold text-slate-700 dark:text-white">Knowledge Bases</h3>
+                                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Select a knowledge base to edit</p>
+                                </div>
+                                
+                                <!-- Knowledge Base List -->
+                                <div class="p-4">
+                                    <ul class="space-y-2">
+                                        <li class="knowledge-base-item active p-3 rounded-md cursor-pointer" data-kb="react">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">10 React Best practices</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">8 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="javascript">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">JavaScript Fundamentals</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">12 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="python">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">Python Data Science</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">15 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="ai">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">AI & Machine Learning</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">22 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="web">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">Web Development</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">18 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="mobile">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">Mobile Development</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">14 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="knowledge-base-item p-3 rounded-md cursor-pointer" data-kb="devops">
+                                            <div class="flex items-center">
+                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                                                    </svg></span>
+                                                <div class="ms-3">
+                                                    <div class="text-sm font-bold text-slate-600 dark:text-slate-200">DevOps & Infrastructure</div>
+                                                    <div class="block text-xs text-slate-500 dark:text-slate-400">20 files</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - File List and Graph -->
+                        <div class="right-panel">
+                            <!-- File List Section -->
+                            <div class="file-list-section">
+                                <div class="rounded-md border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 h-full flex flex-col">
+                                    <div class="border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-lg font-bold text-slate-700 dark:text-white">Files in "10 React Best practices"</h3>
+                                                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Manage documents in this knowledge base</p>
+                                            </div>
+                                            <button class="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-800">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+                                                Add Files
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- File List -->
+                                    <div class="p-5 flex-1 overflow-auto">
+                                        <div class="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800">
+                                            <table class="w-full table-auto border-collapse text-sm">
+                                                <thead class="bg-slate-50 text-slate-600 dark:bg-slate-900 dark:text-slate-200">
+                                                    <tr>
+                                                        <th class="py-3 px-4 text-start">Document</th>
+                                                        <th class="py-3 px-4 text-start">Status</th>
+                                                        <th class="py-3 px-4 text-start">Size</th>
+                                                        <th class="py-3 px-4 text-start">Uploaded</th>
+                                                        <th class="py-3 px-4 text-start"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="file-item completed border-t border-slate-200 dark:border-slate-800">
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-blue-500">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                </svg>
+                                                                <div class="ml-3">
+                                                                    <div class="text-sm font-medium text-slate-700 dark:text-slate-200">react-best-practices.pdf</div>
+                                                                    <div class="text-xs text-slate-500 dark:text-slate-400">Article</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="py-3 px-4">
+                                                            <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                                                                <svg class="mr-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
+                                                                    <circle cx="4" cy="4" r="3" />
+                                                                </svg>
+                                                                Processed
+                                                            </span>
+                                                        </td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">2.4 MB</td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">Apr 3, 2023</td>
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex justify-end gap-2">
+                                                                <button class="rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                                    </svg>
+                                                                </button>
+                                                                <button class="rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="file-item processing border-t border-slate-200 dark:border-slate-800">
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-blue-500">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                </svg>
+                                                                <div class="ml-3">
+                                                                    <div class="text-sm font-medium text-slate-700 dark:text-slate-200">react-hooks-guide.docx</div>
+                                                                    <div class="text-xs text-slate-500 dark:text-slate-400">Guide</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="py-3 px-4">
+                                                            <span class="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                                                <svg class="mr-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
+                                                                    <circle cx="4" cy="4" r="3" />
+                                                                </svg>
+                                                                Processing
+                                                            </span>
+                                                        </td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">1.8 MB</td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">Apr 4, 2023</td>
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex justify-end gap-2">
+                                                                <button class="rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                                    </svg>
+                                                                </button>
+                                                                <button class="rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="file-item border-t border-slate-200 dark:border-slate-800">
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-blue-500">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                </svg>
+                                                                <div class="ml-3">
+                                                                    <div class="text-sm font-medium text-slate-700 dark:text-slate-200">react-performance.txt</div>
+                                                                    <div class="text-xs text-slate-500 dark:text-slate-400">Notes</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="py-3 px-4">
+                                                            <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                                                <svg class="mr-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
+                                                                    <circle cx="4" cy="4" r="3" />
+                                                                </svg>
+                                                                Queued
+                                                            </span>
+                                                        </td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">0.5 MB</td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">Apr 5, 2023</td>
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex justify-end gap-2">
+                                                                <button class="rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                                    </svg>
+                                                                </button>
+                                                                <button class="rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="file-item completed border-t border-slate-200 dark:border-slate-800">
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-blue-500">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                                </svg>
+                                                                <div class="ml-3">
+                                                                    <div class="text-sm font-medium text-slate-700 dark:text-slate-200">react-state-management.md</div>
+                                                                    <div class="text-xs text-slate-500 dark:text-slate-400">Markdown</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="py-3 px-4">
+                                                            <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                                                                <svg class="mr-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
+                                                                    <circle cx="4" cy="4" r="3" />
+                                                                </svg>
+                                                                Processed
+                                                            </span>
+                                                        </td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">0.8 MB</td>
+                                                        <td class="py-3 px-4 text-sm text-slate-500 dark:text-slate-400">Apr 2, 2023</td>
+                                                        <td class="py-3 px-4">
+                                                            <div class="flex justify-end gap-2">
+                                                                <button class="rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                                    </svg>
+                                                                </button>
+                                                                <button class="rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Graph Section -->
+                            <div class="graph-section">
+                                <div class="rounded-md border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 h-full flex flex-col">
+                                    <div class="border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-lg font-bold text-slate-700 dark:text-white">Document Relationship Graph</h3>
+                                                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Visual representation of relationships between .txt files</p>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 transition-all hover:bg-slate-100 dark:border-slate-800 dark:text-slate-200 hover:dark:bg-slate-800">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                                    </svg>
+                                                    Regenerate
+                                                </button>
+                                                <button class="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-blue-800">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                                    </svg>
+                                                    Export
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Graph Visualization -->
+                                    <div id="graph-container">
+                                        <div class="graph-controls">
+                                            <button id="zoom-in">Zoom In</button>
+                                            <button id="zoom-out">Zoom Out</button>
+                                            <button id="reset-view">Reset View</button>
+                                        </div>
+                                        <div class="graph-legend">
+                                            <div class="legend-item">
+                                                <div class="legend-color" style="background-color: #3b82f6;"></div>
+                                                <span>Document Node</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-color" style="background-color: #10b981;"></div>
+                                                <span>Processed</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-color" style="background-color: #f59e0b;"></div>
+                                                <span>Processing</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-color" style="background-color: #94a3b8;"></div>
+                                                <span>Relationship</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer (same as original) -->
+            <div class="relative isolate mt-auto border-t border-slate-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-950">
+                <div class="container px-3">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs font-medium text-slate-600 dark:text-white"> &copy; 2024. Crafted By&nbsp; <a class="text-slate-700 transition-all hover:text-blue-600 dark:text-white hover:dark:text-blue-600" href="https://www.tongzhewang.com" target="_blank"> 童哲网 </a>
+                        </p>
+                        <ul class="-mx-3 flex flex-wrap">
+                            <li>
+                                <a href="#" class="px-3 text-sm font-medium text-slate-600 transition-all hover:text-blue-600 dark:text-slate-100 hover:dark:text-blue-600"> Terms </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="../about.html" class="px-3 text-sm font-medium text-slate-600 transition-all hover:text-blue-600 dark:text-slate-100 hover:dark:text-blue-600"> About </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/bundle-app.js"></script>
+    <script src="../assets/js/scripts.js"></script>
+    <script>
+        // Knowledge base selection
+        document.querySelectorAll('.knowledge-base-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.knowledge-base-item').forEach(kb => {
+                    kb.classList.remove('active');
+                });
+                item.classList.add('active');
+                
+                // In a real application, this would load the files for the selected knowledge base
+                const kbName = item.querySelector('.text-sm.font-bold').textContent;
+                document.querySelector('h3.text-lg').textContent = `Files in "${kbName}"`;
+                
+                // Regenerate graph for the selected knowledge base
+                generateGraph();
+            });
+        });
+
+        // Graph visualization
+        function generateGraph() {
+            const graphContainer = document.getElementById('graph-container');
+            
+            // Clear previous graph
+            graphContainer.innerHTML = `
+                <div class="graph-controls">
+                    <button id="zoom-in">Zoom In</button>
+                    <button id="zoom-out">Zoom Out</button>
+                    <button id="reset-view">Reset View</button>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #3b82f6;"></div>
+                        <span>Document Node</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #10b981;"></div>
+                        <span>Processed</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #f59e0b;"></div>
+                        <span>Processing</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #94a3b8;"></div>
+                        <span>Relationship</span>
+                    </div>
+                </div>
+            `;
+            
+            // Generate random nodes and edges for demonstration
+            const nodes = [
+                { id: 1, name: "react-best-practices", x: 100, y: 100, status: "processed" },
+                { id: 2, name: "hooks-guide", x: 300, y: 150, status: "processed" },
+                { id: 3, name: "performance", x: 200, y: 300, status: "processing" },
+                { id: 4, name: "state-management", x: 400, y: 200, status: "processed" },
+                { id: 5, name: "component-patterns", x: 500, y: 350, status: "processed" },
+                { id: 6, name: "testing-strategies", x: 150, y: 450, status: "processing" },
+                { id: 7, name: "error-handling", x: 350, y: 400, status: "processed" }
+            ];
+            
+            const edges = [
+                { from: 1, to: 2 },
+                { from: 1, to: 3 },
+                { from: 2, to: 4 },
+                { from: 3, to: 5 },
+                { from: 3, to: 6 },
+                { from: 4, to: 7 },
+                { from: 5, to: 7 },
+                { from: 6, to: 7 }
+            ];
+            
+            // Draw edges
+            edges.forEach(edge => {
+                const fromNode = nodes.find(n => n.id === edge.from);
+                const toNode = nodes.find(n => n.id === edge.to);
+                
+                const dx = toNode.x - fromNode.x;
+                const dy = toNode.y - fromNode.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                
+                const edgeElement = document.createElement('div');
+                edgeElement.className = 'graph-edge';
+                edgeElement.style.width = `${length}px`;
+                edgeElement.style.left = `${fromNode.x}px`;
+                edgeElement.style.top = `${fromNode.y}px`;
+                edgeElement.style.transform = `rotate(${angle}deg)`;
+                
+                graphContainer.appendChild(edgeElement);
+            });
+            
+            // Draw nodes
+            nodes.forEach(node => {
+                const nodeElement = document.createElement('div');
+                nodeElement.className = 'graph-node';
+                nodeElement.textContent = node.name;
+                nodeElement.style.left = `${node.x - 40}px`;
+                nodeElement.style.top = `${node.y - 20}px`;
+                
+                if (node.status === 'processed') {
+                    nodeElement.style.backgroundColor = '#10b981';
+                } else if (node.status === 'processing') {
+                    nodeElement.style.backgroundColor = '#f59e0b';
+                }
+                
+                nodeElement.addEventListener('click', () => {
+                    alert(`Clicked on: ${node.name}\nStatus: ${node.status}`);
+                });
+                
+                graphContainer.appendChild(nodeElement);
+            });
+            
+            // Add graph controls functionality
+            document.getElementById('zoom-in').addEventListener('click', () => {
+                alert('Zoom in functionality would be implemented here');
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', () => {
+                alert('Zoom out functionality would be implemented here');
+            });
+            
+            document.getElementById('reset-view').addEventListener('click', () => {
+                alert('Reset view functionality would be implemented here');
+            });
+        }
+        
+        // Initialize graph on page load
+        document.addEventListener('DOMContentLoaded', generateGraph);
+    </script>
+</body>
+</html>

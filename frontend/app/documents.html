@@ -13,6 +13,20 @@
 </head>
 
 <body class="min-w-[320px] bg-slate-100 dark:bg-slate-900">
+
+<script>
+    // 临时使用硬编码
+    const API_URLS = {
+        knowledge_bases: "/api/knowledge_bases",
+        delete_knowledge_base: "/api/knowledge_bases", // 注意：这里需要根据实际路由调整
+        create_knowledge_base: "/api/knowledge_bases"
+    };
+</script>
+
+
+
+
+
     <div id="root">
         <button data-target="#demoSettings" class="class-toggle fixed end-0 top-1/4 z-[1000] flex h-10 w-10 items-center justify-center rounded-s-lg border border-e-0 border-slate-200 bg-white text-slate-500 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5">
@@ -44,7 +58,7 @@
                 </div>
                 <div class="overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600">
                     <div class="grid grid-flow-dense grid-cols-1 gap-4 p-5 md:grid-cols-2">
-                        <a href="overview.html" class="group relative flex flex-col rounded-xl border border-slate-200 bg-white p-2 text-center dark:border-slate-800 dark:bg-slate-950">
+                        <a href="{{ url_for('overview') }}" class="group relative flex flex-col rounded-xl border border-slate-200 bg-white p-2 text-center dark:border-slate-800 dark:bg-slate-950">
                             <img class="h-full w-full rounded-xl border border-slate-100 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-100 group-hover:dark:shadow-blue-950" src="../images/preview/user/dashboard.png" alt="" />
                             <h6 class="relative z-10 pb-2 pt-4 text-base font-bold text-slate-600 dark:text-slate-200"> User App </h6>
                         </a>
@@ -67,7 +81,7 @@
                             <img class="h-full w-full rounded-xl border border-slate-100 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-pink-100 group-hover:dark:shadow-pink-950" src="../images/preview/landing/text-gen-1.png" alt="" />
                             <h6 class="relative z-10 pb-2 pt-4 text-base font-bold text-slate-600 dark:text-slate-200"> Text Generator </h6>
                         </a>
-                        <a href="../index.html" class="group relative flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-2 text-center text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:border-slate-800 dark:bg-slate-950 dark:text-white hover:dark:bg-blue-600">
+                        <a href="{{ url_for('index') }}"  class="group relative flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-2 text-center text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:border-slate-800 dark:bg-slate-950 dark:text-white hover:dark:bg-blue-600">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
                                 <path fill-rule="evenodd" d="M10.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L12.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z" clip-rule="evenodd" />
                                 <path fill-rule="evenodd" d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L6.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z" clip-rule="evenodd" />
@@ -91,7 +105,7 @@
                                     </svg><!-- bars-3 - outline - heroicons -->
                                 </button>
                             </div>
-                            <a href="overview.html" class="flex-shrink-0">
+                            <a href="{{ url_for('overview') }}" class="flex-shrink-0">
                                 <div class="flex items-center">
                                     <img class="h-6 dark:hidden" src="../images/logo.png" alt="logo" />
                                     <img class="hidden h-6 dark:block" src="../images/logo-white.png" alt="logo" />
@@ -102,7 +116,7 @@
                         <div class="main-header peer fixed start-0 top-0 z-[1020] flex h-screen w-64 flex-shrink-0 -translate-x-full flex-col border-e border-slate-200 bg-white py-4 dark:border-slate-800 dark:bg-slate-950 max-xl:overflow-auto max-xl:transition-all xl:static xl:h-auto xl:w-auto xl:!translate-x-0 xl:border-e-0 xl:py-0 xl:transition-none rtl:translate-x-full [&.header-visible]:translate-x-0">
                             <ul class="menu-head flex flex-col gap-x-6 px-4 xl:flex-row xl:items-center">
                                 <li class="menu-item group relative">
-                                    <a href="overview.html" class="menu-link flex items-center py-2 text-sm font-medium text-slate-700 group-hover:text-blue-600 group-[.active>]:text-blue-600 hover:text-blue-600 dark:text-slate-100 group-[.active>]:dark:text-blue-600 hover:dark:text-blue-600 xl:py-3">
+                                    <a href="{{ url_for('overview') }}" class="menu-link flex items-center py-2 text-sm font-medium text-slate-700 group-hover:text-blue-600 group-[.active>]:text-blue-600 hover:text-blue-600 dark:text-slate-100 group-[.active>]:dark:text-blue-600 hover:dark:text-blue-600 xl:py-3">
                                         <span>Home</span>
                                     </a>
                                 </li>
@@ -237,7 +251,7 @@
                                     </div>
                                 </li>
                                 <li class="menu-item group relative">
-                                    <a href="datasets.html" class="menu-link flex items-center py-2 text-sm font-medium text-slate-700 group-hover:text-blue-600 group-[.active>]:text-blue-600 hover:text-blue-600 dark:text-slate-100 group-[.active>]:dark:text-blue-600 hover:dark:text-blue-600 xl:py-3">
+                                    <a href="{{ url_for('documents') }}" class="menu-link flex items-center py-2 text-sm font-medium text-slate-700 group-hover:text-blue-600 group-[.active>]:text-blue-600 hover:text-blue-600 dark:text-slate-100 group-[.active>]:dark:text-blue-600 hover:dark:text-blue-600 xl:py-3">
                                         <span>Documents</span>
                                     </a>
                                 </li>
@@ -390,7 +404,7 @@
                             <h2 class="mb-2 text-xl font-bold text-slate-700 dark:text-white"> All Datasets </h2>
                             <ul class="inline-flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-300">
                                 <li>
-                                    <a href="overview.html" class="text-blue-500 hover:text-blue-700"> Home </a>
+                                    <a href="{{ url_for('overview') }}" class="text-blue-500 hover:text-blue-700"> Home </a>
                                 </li>
                                 <li class="mt-0.5 inline-flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-2 w-2">
@@ -401,7 +415,7 @@
                             </ul>
                         </div>
                         <div class="px-3">
-                            <a href="templates.html" class="inline-flex items-center justify-center gap-3 rounded-md bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-blue-800">Create New</a>
+                            <a href="{{ url_for('manage_dataset') }}" class="inline-flex items-center justify-center gap-3 rounded-md bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-blue-800">Create New</a>
                         </div>
                     </div>
                     <!-- head -->
@@ -435,302 +449,21 @@
                                         <th class="py-2 pe-5 ps-5 text-start last:sticky last:end-0 last:bg-white last:ps-2 last:dark:bg-slate-950"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> 10 React Best practices </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Article Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>10 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> Cowboy hourse riding on the moon </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Article Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>3 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M16.2929 16.7071C15.9024 16.3166 15.9024 15.6834 16.2929 15.2929L19.5858 12L16.2929 8.7071C15.9024 8.31657 15.9024 7.68341 16.2929 7.29289C16.6834 6.90236 17.3166 6.90236 17.7071 7.29289L21.7071 11.2929C22.0976 11.6834 22.0976 12.3166 21.7071 12.7071L17.7071 16.7071C17.3166 17.0976 16.6834 17.0976 16.2929 16.7071Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M7.70711 16.7071C8.09763 16.3166 8.09763 15.6834 7.70711 15.2929L4.41421 12L7.70711 8.7071C8.09763 8.31657 8.09763 7.68341 7.70711 7.29289C7.31658 6.90236 6.68342 6.90236 6.29289 7.29289L2.29289 11.2929C1.90237 11.6834 1.90237 12.3166 2.29289 12.7071L6.29289 16.7071C6.68342 17.0976 7.31658 17.0976 7.70711 16.7071Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C13.7437 3.88677 13.1902 4.19426 13.0385 4.72529L9.03846 18.7253C8.88674 19.2563 9.19423 19.8098 9.72527 19.9615C10.2563 20.1133 10.8098 19.8058 10.9615 19.2747L14.9615 5.27473C15.1132 4.7437 14.8057 4.19021 14.2747 4.03849Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> Write a useEffect function with clean up </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Code Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>1 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> How to Build a Single-Page Application with JavaScript and React </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Article Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>2 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> 10 Tips for Debugging JavaScript Code Like a Pro </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Article Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>5 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M16.2929 16.7071C15.9024 16.3166 15.9024 15.6834 16.2929 15.2929L19.5858 12L16.2929 8.7071C15.9024 8.31657 15.9024 7.68341 16.2929 7.29289C16.6834 6.90236 17.3166 6.90236 17.7071 7.29289L21.7071 11.2929C22.0976 11.6834 22.0976 12.3166 21.7071 12.7071L17.7071 16.7071C17.3166 17.0976 16.6834 17.0976 16.2929 16.7071Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M7.70711 16.7071C8.09763 16.3166 8.09763 15.6834 7.70711 15.2929L4.41421 12L7.70711 8.7071C8.09763 8.31657 8.09763 7.68341 7.70711 7.29289C7.31658 6.90236 6.68342 6.90236 6.29289 7.29289L2.29289 11.2929C1.90237 11.6834 1.90237 12.3166 2.29289 12.7071L6.29289 16.7071C6.68342 17.0976 7.31658 17.0976 7.70711 16.7071Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C13.7437 3.88677 13.1902 4.19426 13.0385 4.72529L9.03846 18.7253C8.88674 19.2563 9.19423 19.8098 9.72527 19.9615C10.2563 20.1133 10.8098 19.8058 10.9615 19.2747L14.9615 5.27473C15.1132 4.7437 14.8057 4.19021 14.2747 4.03849Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> Display a Random Quote on Your Webpage with JavaScript </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Code Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>7 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <div class="flex w-60 items-center sm:w-auto">
-                                                <span class="block h-6 w-6"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M16.2929 16.7071C15.9024 16.3166 15.9024 15.6834 16.2929 15.2929L19.5858 12L16.2929 8.7071C15.9024 8.31657 15.9024 7.68341 16.2929 7.29289C16.6834 6.90236 17.3166 6.90236 17.7071 7.29289L21.7071 11.2929C22.0976 11.6834 22.0976 12.3166 21.7071 12.7071L17.7071 16.7071C17.3166 17.0976 16.6834 17.0976 16.2929 16.7071Z" />
-                                                        <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M7.70711 16.7071C8.09763 16.3166 8.09763 15.6834 7.70711 15.2929L4.41421 12L7.70711 8.7071C8.09763 8.31657 8.09763 7.68341 7.70711 7.29289C7.31658 6.90236 6.68342 6.90236 6.29289 7.29289L2.29289 11.2929C1.90237 11.6834 1.90237 12.3166 2.29289 12.7071L6.29289 16.7071C6.68342 17.0976 7.31658 17.0976 7.70711 16.7071Z" />
-                                                        <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C13.7437 3.88677 13.1902 4.19426 13.0385 4.72529L9.03846 18.7253C8.88674 19.2563 9.19423 19.8098 9.72527 19.9615C10.2563 20.1133 10.8098 19.8058 10.9615 19.2747L14.9615 5.27473C15.1132 4.7437 14.8057 4.19021 14.2747 4.03849Z" />
-                                                    </svg></span>
-                                                <div class="ms-3">
-                                                    <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200"> Create a Simple JavaScript Calculator with Basic Math Operations </div>
-                                                    <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> Code Generator </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="text-xs text-slate-500 dark:text-slate-400">
-                                                <strong>8 </strong> files </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200"> April 3th 2023 </span>
-                                            <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400"> 06:32 PM </span>
-                                        </td>
-                                        <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
-                                            <ul class="flex justify-end gap-2">
-                                                <li>
-                                                    <a href="document-edit.html" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg><!-- eye - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg><!-- trash - outline - heroicons  -->
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                   <tbody id="knowledgeBaseTableBody">
+                                        <!-- 这里会被JavaScript动态填充 -->
+                                    </tbody>
+
+
+
+
+
+                               
+
+
+
+
+
+
                             </table>
                         </div>
                         <!-- body -->
@@ -792,6 +525,172 @@
     <!-- JavaScript -->
     <script src="../assets/js/bundle-app.js"></script>
     <script src="../assets/js/scripts.js"></script>
+
+
+    
+
+<script>
+// 简化版本 - 直接使用硬编码 URL
+const API_BASE = "/api";
+
+// 获取知识库数据
+async function getKnowledgeBases() {
+    try {
+        console.log('开始获取知识库数据...');
+        const response = await fetch(`${API_BASE}/knowledge_bases`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('API响应:', result);
+        
+        if (result.success) {
+            return result.data;
+        } else {
+            throw new Error(result.error || '获取数据失败');
+        }
+    } catch (error) {
+        console.error('获取知识库失败:', error);
+        // 返回模拟数据作为备选
+        return [
+            {
+                "id": 1,
+                "名称": "人工智能知识库",
+                "文档个数": 128,
+                "创建时间": "2024-09-12 10:30:00",
+            },
+            {
+                "id": 2,
+                "名称": "前端开发文档库",
+                "文档个数": 86,
+                "创建时间": "2023-06-05 14:15:00",
+            },
+            {
+                "id": 3,
+                "名称": "公司政策与规章",
+                "文档个数": 54,
+                "创建时间": "2022-11-20 09:00:00",
+            },
+        ];
+    }
+}
+
+// 删除知识库
+async function deleteKnowledgeBase(id) {
+    if (confirm('确定要删除这个知识库吗？')) {
+        try {
+            const response = await fetch(`${API_BASE}/knowledge_bases/${id}`, {
+                method: 'DELETE'
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('删除成功');
+                await renderKnowledgeBases();
+            } else {
+                alert(`删除失败: ${result.error}`);
+            }
+        } catch (error) {
+            console.error('删除失败:', error);
+            alert('删除失败: ' + error.message);
+        }
+    }
+}
+
+// 渲染知识库表格
+async function renderKnowledgeBases() {
+    console.log('开始渲染知识库表格...');
+    const knowledgeBases = await getKnowledgeBases();
+    const tbody = document.getElementById('knowledgeBaseTableBody');
+    
+    if (!tbody) {
+        console.error('找不到表格tbody元素');
+        return;
+    }
+    
+    console.log('获取到的知识库数量:', knowledgeBases.length);
+    tbody.innerHTML = '';
+    
+    if (knowledgeBases.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-slate-500">暂无数据</td></tr>';
+        return;
+    }
+    
+    knowledgeBases.forEach(kb => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
+                <div class="flex w-60 items-center sm:w-auto">
+                    <span class="block h-6 w-6">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full">
+                            <path class="fill-blue-300" d="M13.7087 3.30729C12.6049 2.90591 11.395 2.90591 10.2913 3.30729L3.24266 5.87042C1.48732 6.50872 1.4873 8.99128 3.24266 9.62959L10.2913 12.1927C11.395 12.5941 12.6049 12.5941 13.7087 12.1927L20.7573 9.62959C22.5126 8.99128 22.5126 6.50873 20.7573 5.87042L13.7087 3.30729Z" />
+                            <path class="fill-blue-600" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 12.395C2.24283 11.8746 2.81467 11.6028 3.33504 11.7878L11.33 14.6304C11.7634 14.7845 12.2367 14.7845 12.67 14.6304L20.665 11.7878C21.1854 11.6028 21.7572 11.8746 21.9422 12.395C22.1273 12.9154 21.8554 13.4872 21.335 13.6722L13.3401 16.5149C12.4733 16.8231 11.5268 16.8231 10.66 16.5149L2.66502 13.6722C2.14465 13.4872 1.87279 12.9154 2.05781 12.395Z" />
+                            <path class="fill-blue-300" fill-rule="evenodd" clip-rule="evenodd" d="M2.05781 16.645C2.24283 16.1246 2.81467 15.8528 3.33504 16.0378L11.33 18.8804C11.7634 19.0345 12.2367 19.0345 12.67 18.8804L20.665 16.0378C21.1854 15.8528 21.7572 16.1246 21.9422 16.645C22.1273 17.1654 21.8554 17.7372 21.335 17.9222L13.3401 20.7649C12.4733 21.0731 11.5268 21.0731 10.66 20.7649L2.66502 17.9222C2.14465 17.7372 1.87279 17.1654 2.05781 16.645Z" />
+                        </svg>
+                    </span>
+                    <div class="ms-3">
+                        <div class="line-clamp-2 text-xs font-bold text-slate-600 dark:text-slate-200">${kb.名称}</div>
+                        <div class="block text-[11px] font-medium text-slate-500 dark:text-slate-400">知识库</div>
+                    </div>
+                </div>
+            </td>
+            <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
+                <span class="text-xs text-slate-500 dark:text-slate-400">
+                    <strong>${kb.文档个数}</strong> 个文档
+                </span>
+            </td>
+            <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
+                <span class="block whitespace-nowrap text-xs font-bold text-slate-600 dark:text-slate-200">${kb.创建时间.split(' ')[0]}</span>
+                <span class="block text-[11px] font-medium text-slate-500 dark:text-slate-400">${kb.创建时间.split(' ')[1]}</span>
+            </td>
+            <td class="border-t border-slate-200 py-3 pe-5 ps-5 last:sticky last:end-0 last:bg-white last:ps-2 dark:border-slate-800 last:dark:bg-slate-950">
+                <ul class="flex justify-end gap-2">
+                    <li>
+                        <button onclick="viewKnowledgeBase(${kb.id})" class="inline-flex items-center justify-center rounded-full bg-slate-200 p-2 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-blue-600 hover:dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="deleteKnowledgeBase(${kb.id})" class="inline-flex items-center justify-center rounded-full bg-rose-100 p-2 text-rose-600 transition-all hover:bg-rose-600 hover:text-white dark:bg-rose-950 dark:text-rose-200 hover:dark:bg-rose-600 hover:dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-3 w-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// 查看知识库详情
+function viewKnowledgeBase(id) {
+    alert(`查看知识库 ID: ${id}`);
+}
+
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('页面加载完成，开始初始化...');
+    renderKnowledgeBases();
+});
+</script>
+
+
+  
+
+
+
+
+
+
+   
 </body>
 
 </html>

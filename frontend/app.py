@@ -2,8 +2,10 @@ import os
 import json
 import logging
 from flask import Flask, render_template, request, Response, stream_with_context
+from flask import jsonify  
 from flask_cors import CORS
-from openai import OpenAI
+from datetime import datetime
+from typing import List, Dict
 
 # 配置日志
 logging.basicConfig(
@@ -18,21 +20,31 @@ app = Flask(
     template_folder="app",  
     static_folder="static",
 )
-CORS(app)  # 解决跨域问题
+CORS(app)
 
-# 初始化OpenAI客户端
-client = OpenAI(
-    api_key="DASHSCOPE_API_KEY",  
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"  
-)
+# 知识库数据存储
+knowledge_bases = [
+    {
+        "id": 1,
+        "名称": "人工智能知识库",
+        "文档个数": 128,
+        "创建时间": datetime(2024, 9, 12, 10, 30).strftime("%Y-%m-%d %H:%M:%S"),
+    },
+    {
+        "id": 2,
+        "名称": "前端开发文档库",
+        "文档个数": 86,
+        "创建时间": datetime(2023, 6, 5, 14, 15).strftime("%Y-%m-%d %H:%M:%S"),
+    },
+    {
+        "id": 3,
+        "名称": "公司政策与规章",
+        "文档个数": 54,
+        "创建时间": datetime(2022, 11, 20, 9, 0).strftime("%Y-%m-%d %H:%M:%S"),
+    },
+]
 
-MODEL_MAPPING = {
-    "GPT 4": "qwen3-max",    
-    "Qwen 14B": "qwen3-max",  
-    "Qwen Plus": "qwen3-max"          
-}
-
-########################这一部分集中渲染页面#################################
+########################页面路由#################################
 @app.route("/")
 def index():
     """根路由：返回聊天页面"""
@@ -50,93 +62,111 @@ def documents():
 def manage_dataset():
     return render_template('manage_dataset.html')
 
-
 ############################################################################
 
-@app.route("/api/chat", methods=["POST"])
-def chat():
-    """聊天接口：接收用户消息，调用Qwen模型，流式返回结果"""
-    # 1. 获取前端传递的参数
+########################API路由#################################
+@app.route("/api/knowledge_bases", methods=["GET"])
+def get_knowledge_bases():
+    """获取知识库列表 - 简化版本"""
+    try:
+        logger.info("收到知识库查询请求")
+        
+        # 直接返回数据，不进行任何复杂处理
+        return jsonify({
+            "success": True,
+            "data": knowledge_bases,
+            "count": len(knowledge_bases)
+        })
+        
+    except Exception as e:
+        logger.error(f"获取知识库列表失败：{str(e)}", exc_info=True)
+        return jsonify({
+            "success": False,
+            "error": "获取知识库列表失败",
+            "message": str(e)
+        }), 500
+
+@app.route("/api/knowledge_bases/<int:kb_id>", methods=["DELETE"])
+def delete_knowledge_base(kb_id):
+    """删除知识库"""
+    try:
+        global knowledge_bases
+        logger.info(f"收到删除知识库请求，ID: {kb_id}")
+        
+        # 找到要删除的知识库索引
+        original_count = len(knowledge_bases)
+        knowledge_bases = [kb for kb in knowledge_bases if kb["id"] != kb_id]
+        
+        if len(knowledge_bases) < original_count:
+            logger.info(f"成功删除知识库 ID: {kb_id}")
+            return jsonify({
+                "success": True,
+                "message": f"成功删除知识库"
+            })
+        else:
+            logger.warning(f"未找到指定的知识库 ID: {kb_id}")
+            return jsonify({
+                "success": False,
+                "error": "未找到指定的知识库"
+            }), 404
+            
+    except Exception as e:
+        logger.error(f"删除知识库失败：{str(e)}", exc_info=True)
+        return jsonify({
+            "success": False,
+            "error": "删除知识库失败",
+            "message": str(e)
+        }), 500
+
+@app.route("/api/knowledge_bases", methods=["POST"])
+def create_knowledge_base():
+    """创建知识库"""
     try:
         data = request.get_json()
-        user_message = data.get("message", "").strip()  
-        selected_model = data.get("model", "")           
+        logger.info(f"收到创建知识库请求: {data}")
+        
+        if not data or not data.get("名称"):
+            return jsonify({
+                "success": False,
+                "error": "知识库名称不能为空"
+            }), 400
+            
+        # 生成新ID
+        new_id = max([kb["id"] for kb in knowledge_bases]) + 1 if knowledge_bases else 1
+        
+        new_kb = {
+            "id": new_id,
+            "名称": data.get("名称"),
+            "文档个数": 0,
+            "创建时间": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+        knowledge_bases.append(new_kb)
+        
+        logger.info(f"成功创建知识库: {new_kb['名称']}")
+        return jsonify({
+            "success": True,
+            "data": new_kb
+        })
+        
     except Exception as e:
-        logger.error(f"解析请求参数失败：{str(e)}")
-        return Response(
-            json.dumps({"error": "请求格式错误，请检查参数"}),
-            mimetype="application/json",
-            status=400
-        )
+        logger.error(f"创建知识库失败：{str(e)}", exc_info=True)
+        return jsonify({
+            "success": False,
+            "error": "创建知识库失败",
+            "message": str(e)
+        }), 500
 
-    # 2. 验证参数合法性
-    if not user_message:
-        return Response(
-            json.dumps({"error": "消息内容不能为空"}),
-            mimetype="application/json",
-            status=400
-        )
-    if selected_model not in MODEL_MAPPING:
-        return Response(
-            json.dumps({"error": "所选模型不支持，请重新选择"}),
-            mimetype="application/json",
-            status=400
-        )
-
-    # 3. 映射到Qwen实际模型ID
-    qwen_model = MODEL_MAPPING[selected_model]
-    logger.info(f"开始处理请求：模型={qwen_model}，消息={user_message[:20]}...") 
-
-    # 4. 定义流式响应生成函数
-    @stream_with_context
-    def generate_stream():
-        try:
-            completion = client.chat.completions.create(
-                model=qwen_model,
-                messages=[
-                    {"role": "system", "content": "你是一个乐于助人的智能助手，用简洁明了的语言回答用户问题。"},
-                    {"role": "user", "content": user_message}
-                ],
-                stream=True,  
-                temperature=0.7  
-            )
-
-            # 迭代处理流式返回的每一块内容
-            for chunk in completion:
-                # 提取增量文本
-                if chunk.choices and chunk.choices[0].delta.content:
-                    bot_text = chunk.choices[0].delta.content  
-                    # 以SSE（Server-Sent Events）格式返回给前端
-                    yield f"data: {json.dumps({'text': bot_text})}\n\n"
-                    logger.debug(f"返回流式数据：{bot_text}")  # 调试日志
-
-            logger.info("流式响应完成")
-
-        except Exception as e:
-            # 捕获所有异常并返回给前端
-            error_msg = f"模型调用失败：{str(e)}"
-            logger.error(error_msg)
-            yield f"data: {json.dumps({'error': error_msg})}\n\n"
-
-    # 5. 返回流式响应（指定SSE格式）
-    return Response(generate_stream(), mimetype="text/event-stream")
-
-def test_qwen_api():
-    try:
-        completion = client.chat.completions.create(
-            model="qwen3-max",  
-            messages=[{"role": "user", "content": "你好"}],
-            stream=False  
-        )
-        print("模型响应：", completion.choices[0].message.content)
-    except Exception as e:
-        print("测试失败：", str(e))
-
+@app.route("/api/health", methods=["GET"])
+def health_check():
+    """健康检查接口"""
+    return jsonify({
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat()
+    })
 
 if __name__ == "__main__":
-    test_qwen_api()
     app.run(
-        debug=False,
+        debug=True,
         host="0.0.0.0", 
         port=5000        
     )

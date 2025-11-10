@@ -11323,3 +11323,35 @@ select {
 .\[\&_\.heading\]\:col-span-2 .heading {
   grid-column: span 2 / span 2;
 }
+
+/* 代码块样式 */
+.code-container {
+    border: 1px solid #374151;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.code-header {
+    color: #e5e7eb;
+}
+.code-body {
+    margin: 0;
+    color: #f3f4f6;
+}
+.copy-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+/* 消息块基础样式 */
+.message-block {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+.thinking-block {
+    background-color: #f0f9ff; /* 浅蓝色背景（thinking类型） */
+}
+.result-block {
+    background-color: #ffffff; /* 白色背景（result类型） */
+}
+
